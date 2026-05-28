@@ -8,6 +8,12 @@ class Trie:
         self.root = TrieNode()
         self.size = 0
 
+    @staticmethod
+    def _validate_string(value, param_name):
+        if not isinstance(value, str):
+            raise TypeError(f"{param_name} must be a string")
+        return value
+
     def put(self, key, value=None):
         if not isinstance(key, str) or not key:
             raise TypeError(f"Illegal argument for put: key = {key} must be a non-empty string")
@@ -100,3 +106,11 @@ class Trie:
         result = []
         self._collect(self.root, [], result)
         return result
+
+    def count_words_with_suffix(self, pattern):
+        pattern = self._validate_string(pattern, "pattern")
+        return sum(word.endswith(pattern) for word in self.keys())
+
+    def has_prefix(self, prefix):
+        prefix = self._validate_string(prefix, "prefix")
+        return bool(self.keys_with_prefix(prefix))
