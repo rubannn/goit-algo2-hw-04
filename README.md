@@ -55,6 +55,37 @@
 - `count_words_with_suffix(pattern)` для підрахунку кількості слів, що закінчуються заданим шаблоном;
 - `has_prefix(prefix)` для перевірки наявності слів із заданим префіксом.
 
+#### Шаблон програми
+```python
+from trie import Trie
+
+class Homework(Trie):
+    def count_words_with_suffix(self, pattern) -> int:
+        pass
+
+    def has_prefix(self, prefix) -> bool:
+       pass
+
+if __name__ == "__main__":
+    trie = Homework()
+    words = ["apple", "application", "banana", "cat"]
+    for i, word in enumerate(words):
+        trie.put(word, i)
+
+    # Перевірка кількості слів, що закінчуються на заданий суфікс
+    assert trie.count_words_with_suffix("e") == 1  # apple
+    assert trie.count_words_with_suffix("ion") == 1  # application
+    assert trie.count_words_with_suffix("a") == 1  # banana
+    assert trie.count_words_with_suffix("at") == 1  # cat
+
+    # Перевірка наявності префікса
+    assert trie.has_prefix("app") == True  # apple, application
+    assert trie.has_prefix("bat") == False
+    assert trie.has_prefix("ban") == True  # banana
+    assert trie.has_prefix("ca") == True  # cat
+```
+
+
 #### Технічні умови
 
 - Клас `Homework` має успадковувати базовий клас `Trie`.
@@ -62,3 +93,11 @@
 - Вхідні параметри обох методів мають бути рядками.
 - Метод `count_words_with_suffix` має повертати ціле число.
 - Метод `has_prefix` має повертати булеве значення.
+
+#### Критерії прийняття
+
+1. Метод count_words_with_suffix повертає кількість слів, що закінчуються на заданий pattern. За відсутності слів повертає 0. Враховує регістр символів.
+2. Метод has_prefix повертає True, якщо існує хоча б одне слово із заданим префіксом. Повертає False, якщо таких слів немає. Враховує регістр символів.
+3. Код проходить усі тести.
+4. Обробляються некоректні вхідні дані.
+5. Методи працюють ефективно на великих наборах даних.
